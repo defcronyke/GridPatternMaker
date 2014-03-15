@@ -1,0 +1,107 @@
+GridPatternMaker has been tested on Arch Linux x86_64 and Windows 7 x86_64.
+
+Here are instructions for running it on Linux and Windows.
+
+Linux Instructions
+==================
+You have either the binary or the source release. Please follow the 
+corresponding instructions.
+
+Binary Release Instructions:
+
+    You'll need to install these Dependencies:
+        SDL 2.x
+        SDL2_image
+        wxwidgets 3.0.x
+
+    Then just run the gridpatternmaker binary.
+
+
+Source Release Instructions:
+
+    Install Build Dependencies (you'll need the dev packages of these on some distros):
+        7-Zip
+        A C++11 compiler
+        CMake 2.8.10 or newer
+        SDL 2.x
+        SDL2_image
+        wxwidgets 3.0.x
+
+    To Compile and Run:
+        mkdir -p build
+        cd build
+        cmake ..
+        make
+        cd ..
+        build/gridpatternmaker&
+
+--> **To make a Linux binary-only release from the Source Release**:
+        Make sure CMakeLists.txt has this line uncommented:
+            set (CMAKE_BUILD_TYPE Release)
+            And make sure the similar Debug line is commented out.
+		
+        ./make_linux_bin_release.sh
+        The build directory will now contain a new .tar.7z file, which is a
+        binary-only release version of GridPatternMaker.
+
+Windows Instructions
+====================
+Binary Release Instructions:
+    
+    Run gridpatternmaker.exe, or create a shortcut for it somewhere.
+
+
+Source Release Instructions:
+    
+    Builds with MinGW and CMake
+    
+    Install these build dependencies (all in default locations):
+
+        7-Zip
+			64-bit
+				http://downloads.sourceforge.net/sevenzip/7z920-x64.msi
+			
+			32-bit
+				http://downloads.sourceforge.net/sevenzip/7z920.exe
+
+        A recent version of MinGW 
+			64-bit 
+				http://sourceforge.net/projects/mingw-w64/files/Toolchains%20targetting%20Win64/Personal%20Builds/mingw-builds/4.8.2/threads-win32/sjlj/x86_64-4.8.2-release-win32-sjlj-rt_v3-rev3.7z/download 
+				Unzip to C:\
+				Add C:\mingw64\bin to $PATH.
+				
+			32-bit
+				http://sourceforge.net/projects/mingw/files/Installer/mingw-get-setup.exe/download
+				install mingw32-base and mingw32-gcc-g++
+				open C:\mingw\include\commctrl.h and change line 2217 from #define TV_DISPINFO __AW(NMTVDISPINFO) to #define TV_DISPINFO NMTVDISPINFO
+				open C:\mingw\include\io.h and on lines 301 and 302, change all occurences of off64_t to _off64_t
+				Add C:\mingw\bin to $PATH.
+			
+        CMake 2.8.10 or newer
+			http://www.cmake.org/files/v2.8/cmake-2.8.12.2-win32-x86.exe
+
+        SDL 2.x
+			http://www.libsdl.org/release/SDL2-devel-2.0.2-mingw.tar.gz
+            Unzip to C:\
+
+        SDL2_image
+			https://www.libsdl.org/projects/SDL_image/release/SDL2_image-devel-2.0.0-mingw.tar.gz
+            Unzip to C:\
+
+        wxwidgets 3.0.x
+			http://sourceforge.net/projects/wxwindows/files/3.0.0/wxMSW-3.0.0-Setup.exe/download
+            Compile:
+                cd C:\wxWidgets-3.0.0\build\msw
+                mingw32-make -f makefile.gcc SHARED=1 UNICODE=1 BUILD=release
+
+    Open a console and cd into the project directory, then type: 
+        64-bit
+            make_win64_bin_release.bat
+        
+        32-bit
+            make_win32_bin_release.bat
+    
+    The build directory will now contain a new .7z file, which is a binary-only 
+    release version of GridPatternMaker.
+
+
